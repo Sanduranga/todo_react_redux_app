@@ -3,8 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchTodos } from '../redux/todoActions'
 
-
-export default function TodoUi() {
+export default function TodoUi({editTaskId, checkTaskId}) {
 
     const dispatch = useDispatch()
     
@@ -13,10 +12,20 @@ export default function TodoUi() {
     }, [])
 
     const handleDelete = (id) => {
-        dispatch(fetchTodos(id, 'delete'))
+        dispatch(fetchTodos(null, 'delete', id))
     }
 
-    const gotTodo = useSelector((state) => state.todo.todos) 
+    const handleEdit = (id) => {  
+        editTaskId(id)
+    }
+
+    const handleCheck = (id) => {  
+        checkTaskId(id)
+    }
+
+    const {todos, loading, err} = useSelector((state) => state.todo) 
+
+    if (loading) return <div className='flex flex-col items-center mt-5 font-bold'>Loading....</div>
 
     return (
         <div className='flex flex-col items-center mt-5'>
@@ -30,14 +39,14 @@ export default function TodoUi() {
                 </tr>
             
            
-                {gotTodo.map((list) => (
+                {todos.map((list) => (
                 <tr key={list.id}>
                      <td className='p-4 bg-gray-100'>{list.userId}</td>
                      <td className='p-4 bg-gray-100'>{list.id}</td>
                      <td className='p-4 bg-gray-100'>{list.title}</td>
                      <td className='flex flex-row p-4 bg-gray-100'>
-                        <div><input type='checkbox'></input></div>
-                        <div><button className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-5'>Ed</button></div>
+                        <div><input onChange={() => handleCheck(list.id)} type='checkbox'></input></div>
+                        <div><button onClick={() => handleEdit(list.id)} className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-5'>Ed</button></div>
                         <div><button onClick={() => handleDelete(list.id)} className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2'>De</button></div>
                      </td>
                 </tr>

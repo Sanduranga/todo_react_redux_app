@@ -1,11 +1,12 @@
-import { getLoadTodo, getSuccessedTodo, getErrorTodo, postSuccessTodo, deletetodo } from "./actionTypes";
+import { getLoadTodo, getSuccessedTodo, getErrorTodo, postSuccessTodo, updateTodo, updateErrTodo, postErrTodo, checkedObjTodo, checkedErrTodo } from "./actionTypes";
 
 
 const initialState = {
     todos: [],
     loading: false,
-    err: null
+    err: null,
 }
+
 export default function todoReducer(state = initialState, action) {
     switch (action.type) {
         case getSuccessedTodo:
@@ -28,7 +29,27 @@ export default function todoReducer(state = initialState, action) {
                 ...state,
                 todos: action.payload,
             }
-        case deletetodo:
+        case postErrTodo:
+            return {
+                ...state,
+                todos: action.payload,
+            }
+        case updateTodo:
+            return {
+                ...state,
+                todos: action.payload,
+            }
+        case updateErrTodo:
+            return {
+                ...state,
+                todos: action.payload,
+            }
+        case checkedObjTodo:
+            return {
+                ...state,
+                todos: action.payload,
+            }
+        case checkedErrTodo:
             return {
                 ...state,
                 todos: action.payload,

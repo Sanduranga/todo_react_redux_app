@@ -10,7 +10,6 @@ function App() {
     <Provider store={store}>
       <div className="text-2xl">
         <FormInputs/>
-        <TodoUi/>
       </div>
     </Provider>
   );
