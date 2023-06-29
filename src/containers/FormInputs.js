@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchTodos } from '../redux/todoActions'
+import { fetchTodos } from '../redux/todoApp/todoActions'
 import TodoUi from '../components/TodoUi'
 import axios from 'axios'
 
@@ -47,7 +47,6 @@ export default function FormInputs() {
         const arrayId = id - 1
         const checkedObj = todoState[arrayId]
         checkedObj.completed === true ? checkedObj.completed = false : checkedObj.completed = true
-        console.log(checkedObj)
         dispatch(fetchTodos(checkedObj, 'check', id))
     }
 

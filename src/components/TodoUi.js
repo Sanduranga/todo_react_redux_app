@@ -1,7 +1,8 @@
 
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchTodos } from '../redux/todoActions'
+import { fetchTodos } from '../redux/todoApp/todoActions'
+
 
 export default function TodoUi({editTaskId, checkTaskId}) {
 
@@ -23,7 +24,7 @@ export default function TodoUi({editTaskId, checkTaskId}) {
         checkTaskId(id)
     }
 
-    const {todos, loading, err} = useSelector((state) => state.todo) 
+    const {todos, loading,} = useSelector((state) => state.todo) 
 
     if (loading) return <div className='flex flex-col items-center mt-5 font-bold'>Loading....</div>
 
